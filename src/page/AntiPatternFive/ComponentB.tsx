@@ -18,8 +18,7 @@ const ComponentB = (props: Props) => {
 	}
 
 	const combinedData = useMemo(() => {
-		const reduxData = defaultUser?.data
-		return [...reduxData, ...userDataB]
+		return [...defaultUser?.data, ...userDataB]
 	}, [defaultUser, userDataB])
 
 	if (defaultUser.isLoading) return <>Loading...</>
@@ -43,7 +42,7 @@ const ComponentB = (props: Props) => {
 			<h4 className='ml-2'>Component B</h4>
 			<div className='input-group mb-3 ml-2'>
 				<input
-					id={'user-a'}
+					id={'user-b'}
 					type='text'
 					className='form-control'
 					placeholder='Add Username Only in Component B'
@@ -54,7 +53,7 @@ const ComponentB = (props: Props) => {
 					<button
 						className='btn btn-outline-secondary'
 						type='button'
-						onClick={() => addUser((document.getElementById('user-a') as HTMLInputElement).value)}
+						onClick={() => addUser((document.getElementById('user-b') as HTMLInputElement).value)}
 					>
 						Add User
 					</button>

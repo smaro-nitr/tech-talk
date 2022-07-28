@@ -18,9 +18,10 @@ const AntiPatternComponent = () => {
 	customLog('Anti Pattern Component Loaded')
 
 	return (
-		<>
-			<div className='d-flex flex-fill flex-row'>
-				<div className='d-flex flex-column w-50 p-4'>
+		<div className='d-flex flex-column px-4 py-2'>
+			<h3 className='mb-4'>Target: Visualizing the impact of key atrribute on ReactJs rendering.</h3>
+			<div className='d-flex flex-fill flex-row mt-4'>
+				<div className='d-flex flex-column w-50'>
 					<h4 className='text-danger'>Loop with Index</h4>
 					<ul>
 						{loop.map((item, index) => {
@@ -32,7 +33,7 @@ const AntiPatternComponent = () => {
 						})}
 					</ul>
 				</div>
-				<div className='d-flex flex-column w-50 p-4'>
+				<div className='d-flex flex-column w-50'>
 					<h4 className={'text-success'}>Loop with Id</h4>
 					<ul>
 						{loopWithId.map((item, index) => {
@@ -46,9 +47,9 @@ const AntiPatternComponent = () => {
 				</div>
 			</div>
 			<button type='button' className='m-4 btn btn-info' onClick={updateLoop}>
-				Insert Data at 3rd Index
+				Insert Data at 2nd Index
 			</button>
-		</>
+		</div>
 	)
 }
 

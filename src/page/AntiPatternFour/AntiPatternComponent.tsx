@@ -3,8 +3,8 @@ import {customLog} from 'utility/logger'
 import {calculateLoss, calculateProfit} from './AntiPatternHelper'
 
 const AntiPatternComponent = () => {
-	const [profitBaseAmount, setProfitBaseAmount] = useState(0)
-	const [lossBaseAmount, setLossBaseAmount] = useState(0)
+	const [profitBaseAmount, setProfitBaseAmount] = useState(null)
+	const [lossBaseAmount, setLossBaseAmount] = useState(null)
 
 	const profit = useMemo(() => calculateProfit(profitBaseAmount), [profitBaseAmount])
 	const loss = calculateLoss(lossBaseAmount)
@@ -12,8 +12,9 @@ const AntiPatternComponent = () => {
 	customLog('Anti Pattern Component Loaded')
 
 	return (
-		<div className='d-flex flex-fill flex-row'>
-			<div className='d-flex flex-column w-50 p-4'>
+		<div className='d-flex flex-column px-4 py-2'>
+			<h3>Target: To prevent logic calculation untill requested exclusively.</h3>
+			<div className='d-flex box flex-column w-100 my-4'>
 				<h4 className={profit > 0 && loss === 0 ? 'text-danger' : profit > 0 && loss > 0 ? 'text-success' : ''}>
 					Profit Calculator (Assuming 10% Profit){' '}
 				</h4>
@@ -38,9 +39,13 @@ const AntiPatternComponent = () => {
 						</button>
 					</div>
 				</div>
-				<h4>Total Value with Profit: {profit} </h4>
+				{profitBaseAmount && (
+					<h4>
+						Total Profit for {profitBaseAmount} INR: {profit} INR
+					</h4>
+				)}
 			</div>
-			<div className='d-flex flex-column w-50 p-4'>
+			<div className='d-flex box flex-column w-100 mt-4'>
 				<h4 className={profit > 0 || loss > 0 ? 'text-danger' : ''}>Loss Calculator (Assuming 10% Loss) </h4>
 				<div className='input-group mb-3'>
 					<input
@@ -61,7 +66,11 @@ const AntiPatternComponent = () => {
 						</button>
 					</div>
 				</div>
-				<h4>Total Value with Loss: {loss} </h4>
+				{lossBaseAmount && (
+					<h4>
+						Total Loss for {lossBaseAmount} INR: {loss} INR
+					</h4>
+				)}
 			</div>
 		</div>
 	)
