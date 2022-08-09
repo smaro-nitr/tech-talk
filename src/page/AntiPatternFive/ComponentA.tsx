@@ -2,14 +2,12 @@ import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {AntiPatternSelector} from './AntiPatternSlicer'
 
-interface Props {
-	visualize: boolean
-}
+interface Props {}
 
 const ComponentA = (props: Props) => {
-	const {visualize} = props
 	const {defaultUser} = useSelector(AntiPatternSelector)
 	const [userDataA, setUserDataA] = useState([])
+	const [visualize, setVisualize] = useState(false)
 
 	useEffect(() => {
 		defaultUser.data && setUserDataA(defaultUser.data)
@@ -21,6 +19,8 @@ const ComponentA = (props: Props) => {
 		setUserDataA(newUserDataA)
 	}
 
+	const toggleData = () => setVisualize(!visualize)
+
 	if (defaultUser.isLoading) return <>Loading...</>
 
 	return (
@@ -28,18 +28,23 @@ const ComponentA = (props: Props) => {
 			{visualize && (
 				<>
 					<div className='d-flex flex-column w-100 my-2 p-2 border bg-fee'>
-						<h5>Component A State</h5>
+						<h5>Component A : State</h5>
 						<b>userDataA</b>
 						<pre className='d-flex w-100'>{JSON.stringify(userDataA)}</pre>
 					</div>
 					<div className='d-flex flex-column w-100 mb-2 p-2 border bg-fee'>
-						<h5>Component A Memoized Constant</h5>
+						<h5>Component A : Memoized Constant</h5>
 						<b>NA</b>
 						<pre className='d-flex w-100'>{JSON.stringify(null)}</pre>
 					</div>
 				</>
 			)}
-			<h4>Component A</h4>
+			<h4>
+				Component A
+				<span className='badge badge-pill badge-info cursor-pointer ml-4' onClick={toggleData}>
+					{visualize ? <>&#x2716;</> : <>&#10003;</>}
+				</span>
+			</h4>
 			<div className='input-group mb-3'>
 				<input
 					id={'user-a'}

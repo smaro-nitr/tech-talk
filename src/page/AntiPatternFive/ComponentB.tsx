@@ -2,14 +2,12 @@ import {useMemo, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {AntiPatternSelector} from './AntiPatternSlicer'
 
-interface Props {
-	visualize: boolean
-}
+interface Props {}
 
 const ComponentB = (props: Props) => {
-	const {visualize} = props
 	const {defaultUser} = useSelector(AntiPatternSelector)
 	const [userDataB, setUserDataB] = useState([])
+	const [visualize, setVisualize] = useState(false)
 
 	const addUser = user => {
 		const newUserDataB = JSON.parse(JSON.stringify(userDataB))
@@ -21,6 +19,8 @@ const ComponentB = (props: Props) => {
 		return [...defaultUser?.data, ...userDataB]
 	}, [defaultUser, userDataB])
 
+	const toggleData = () => setVisualize(!visualize)
+
 	if (defaultUser.isLoading) return <>Loading...</>
 
 	return (
@@ -28,18 +28,23 @@ const ComponentB = (props: Props) => {
 			{visualize && (
 				<>
 					<div className='d-flex flex-column w-100 my-2 ml-2 p-2 border bg-efe'>
-						<h5>Component B State</h5>
+						<h5>Component B : State</h5>
 						<b>userDataB</b>
 						<pre className='d-flex w-100'>{JSON.stringify(userDataB)}</pre>
 					</div>
 					<div className='d-flex flex-column w-100 mb-2 ml-2 p-2 border bg-efe'>
-						<h5>Component B Memoized Constant</h5>
+						<h5>Component B : Memoized Constant</h5>
 						<b>combinedData</b>
 						<pre className='d-flex w-100'>{JSON.stringify(combinedData)}</pre>
 					</div>
 				</>
 			)}
-			<h4 className='ml-2'>Component B</h4>
+			<h4 className='ml-2'>
+				Component B
+				<span className='badge badge-pill badge-info cursor-pointer ml-4' onClick={toggleData}>
+					{visualize ? <>&#x2716;</> : <>&#10003;</>}
+				</span>
+			</h4>
 			<div className='input-group mb-3 ml-2'>
 				<input
 					id={'user-b'}

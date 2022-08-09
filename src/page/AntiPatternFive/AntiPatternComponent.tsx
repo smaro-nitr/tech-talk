@@ -29,10 +29,10 @@ const AntiPatternFive = (props: Props) => {
 			</div>
 			<div className='d-flex flex-row w-100'>
 				<div className='d-flex flex-column w-50 mt-2'>
-					<FirstChildren visualize={false} />
+					<FirstChildren />
 				</div>
 				<div className='d-flex flex-column w-50 mt-2'>
-					<SecondChildren visualize={false} />
+					<SecondChildren />
 				</div>
 			</div>
 		</div>
