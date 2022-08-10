@@ -1,4 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux'
+import {customLog} from 'utility/logger'
 import {getDefaultUser} from './AntiPatternAction'
 import {AntiPatternSelector} from './AntiPatternSlicer'
 import FirstChildren from './ComponentA'
@@ -15,6 +16,8 @@ const AntiPatternFive = (props: Props) => {
 	const getAllUser = () => {
 		dispatch(getDefaultUser())
 	}
+
+	customLog('Anti Pattern Component Loaded')
 
 	return (
 		<div className='d-flex flex-column px-4 py-2'>
